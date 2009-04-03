@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://code.google.com/p/brainfuck4j/"
+            class="com.google.code.brainfuck4j.model.brainfuck.BrainfuckPackage"
+            genModel="src/com/google/code/brainfuck4j/model/ecore/brainfuck.genmodel"/>
+   </extension>
+
+</plugin>
