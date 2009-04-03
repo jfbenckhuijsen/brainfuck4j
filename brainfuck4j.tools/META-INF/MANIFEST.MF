@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Brainfuck4j Tools Plug-in
+Bundle-SymbolicName: com.google.code.brainfuck4j.tools
+Bundle-Version: 1.0.0
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: com.google.code.brainfuck4j.compiler;bundle-version="1.0.0",
+ com.google.code.brainfuck4j.parser;bundle-version="1.0.0",
+ com.google.code.brainfuck4j.model;bundle-version="1.0.0",
+ org.junit4,
+ org.eclipse.emf.ecore.xmi;bundle-version="2.4.1"
