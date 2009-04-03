@@ -1,0 +1,24 @@
+<project name="Brainfuck parser" default="brainfuck" basedir=".">
+
+	<property name="javacc.home" value="/home/a108600/apps/javacc-4.2/bin/lib" />
+	<property name="srcgen.dir" value="src-gen/com/googlecode/brainfuck4j"/>
+
+	<target name="brainfuck" description="Builds parser Brainfuck">
+		<delete dir="${srcgen.dir}" />
+		<mkdir dir="${srcgen.dir}" />
+		<copydir dest="src-gen/" src="src-copy"/>
+		<jjtree 
+			target="Brainfuck.jjt" 
+			outputdirectory="${srcgen.dir}" 
+			javacchome="${javacc.home}" />
+		<javacc target="${srcgen.dir}/Brainfuck.jj" 
+			outputdirectory="${srcgen.dir}" 
+			javacchome="${javacc.home}" />
+	</target>
+
+	<target name="clean" description="Cleans up any example directories">
+		<delete dir="${srcgen.dir}" />
+	</target>
+
+
+</project>
