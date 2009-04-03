@@ -1,0 +1,160 @@
+/**
+ * 
+ */
+package com.googlecode.brainfuck4j;
+
+/**
+ * @author a108600
+ * 
+ */
+public class DumpVisitor implements BrainfuckVisitor {
+	private int indentation = 0;
+
+	/**
+	 * 
+	 */
+	public DumpVisitor() {
+		super();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.googlecode.brainfuck4j.BrainfuckVisitor#visit(com.googlecode.brainfuck4j
+	 * .SimpleNode, java.lang.Object)
+	 */
+	@Override
+	public Object visit(SimpleNode node, Object data) {
+		System.out.println(indentString(node.toString() + ": acceptor not unimplemented in subclass?"));
+	    ++indentation;
+	    data = node.childrenAccept(this, data);
+	    --indentation;
+	    return data;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.googlecode.brainfuck4j.BrainfuckVisitor#visit(com.googlecode.brainfuck4j
+	 * .ASTStart, java.lang.Object)
+	 */
+	@Override
+	public Object visit(ASTStart node, Object data) {
+		System.out.println(indentString(node.toString()));
+	    ++indentation;
+	    data = node.childrenAccept(this, data);
+	    --indentation;
+	    return data;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.googlecode.brainfuck4j.BrainfuckVisitor#visit(com.googlecode.brainfuck4j
+	 * .Header, java.lang.Object)
+	 */
+	@Override
+	public Object visit(Header node, Object data) {
+		System.out.println(indentString(node.toString()));
+	    ++indentation;
+	    data = node.childrenAccept(this, data);
+	    --indentation;
+	    return data;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.googlecode.brainfuck4j.BrainfuckVisitor#visit(com.googlecode.brainfuck4j
+	 * .ProgramHeader, java.lang.Object)
+	 */
+	@Override
+	public Object visit(ProgramHeader node, Object data) {
+		System.out.println(indentString(node.toString()));
+	    ++indentation;
+	    data = node.childrenAccept(this, data);
+	    --indentation;
+	    return data;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.googlecode.brainfuck4j.BrainfuckVisitor#visit(com.googlecode.brainfuck4j
+	 * .HeapHeader, java.lang.Object)
+	 */
+	@Override
+	public Object visit(HeapHeader node, Object data) {
+		System.out.println(indentString(node.toString()));
+	    ++indentation;
+	    data = node.childrenAccept(this, data);
+	    --indentation;
+	    return data;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.googlecode.brainfuck4j.BrainfuckVisitor#visit(com.googlecode.brainfuck4j
+	 * .Expression, java.lang.Object)
+	 */
+	@Override
+	public Object visit(Expression node, Object data) {
+		System.out.println(indentString(node.toString()));
+	    ++indentation;
+	    data = node.childrenAccept(this, data);
+	    --indentation;
+	    return data;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.googlecode.brainfuck4j.BrainfuckVisitor#visit(com.googlecode.brainfuck4j
+	 * .UnaryExpression, java.lang.Object)
+	 */
+	@Override
+	public Object visit(UnaryExpression node, Object data) {
+		System.out.println(indentString(node.toString()));
+	    ++indentation;
+	    data = node.childrenAccept(this, data);
+	    --indentation;
+	    return data;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.googlecode.brainfuck4j.BrainfuckVisitor#visit(com.googlecode.brainfuck4j
+	 * .BlockExpression, java.lang.Object)
+	 */
+	@Override
+	public Object visit(BlockExpression node, Object data) {
+		System.out.println(indentString(node.toString()));
+	    ++indentation;
+	    data = node.childrenAccept(this, data);
+	    --indentation;
+	    return data;
+	}
+
+	/**
+	 * @param text
+	 * @return
+	 */
+	private String indentString(String text) {
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < indentation; ++i) {
+			sb.append(' ');
+		}
+		sb.append(text);
+		return sb.toString();
+	}
+}

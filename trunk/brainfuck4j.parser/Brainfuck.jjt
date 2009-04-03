@@ -1,0 +1,131 @@
+options {
+
+  MULTI=true;
+  KEEP_LINE_COLUMN=false;
+  NODE_PREFIX="";
+  VISITOR=true;
+} 
+
+PARSER_BEGIN(Brainfuck)
+package com.googlecode.brainfuck4j;
+
+import java.io.InputStream;
+
+public class Brainfuck {
+
+	public static ASTStart parse (InputStream in, BrainfuckVisitor visitor) throws ParseException {
+		Brainfuck bf = new Brainfuck(in);
+		ASTStart root = bf.ASTStart();
+		root.jjtAccept(visitor, null);
+		return root;
+	}
+
+}
+
+PARSER_END(Brainfuck)
+
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+| <"//" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>
+| <"/*" (~["*"])* "*" (~["/"] (~["*"])* "*")* "/">
+}
+
+TOKEN : /* INSTRUCTIONS */
+{
+  < INSTRUCTION_LITERAL: 
+  	"<" 
+   | 
+  	">"
+   | 
+    "+" 
+   |
+    "-" 
+   |
+    "." 
+   |
+    "," 
+  >
+}
+
+TOKEN : /* Header keywords and values */
+{
+	< PROGRAM_NAME_KEYWORD: "Program" >
+|
+	< HEAP_SIZE_KEYWORD: "Heapsize" >
+|
+	< CODE_KEYWORD: "Code" >
+|
+	< PROGRAM_NAME: ["a"-"z","A"-"Z"] (["a"-"z","A"-"Z"])*>
+|
+	< HEAP_SIZE: ["1"-"9"] (["0"-"9"])* >
+
+}
+
+/** Root production. */
+ASTStart ASTStart() : {}
+{
+	Header()
+	(Expression())*
+	{ return jjtThis; } 
+}
+
+/** Header productions. */
+void Header() : {}
+{
+	ProgramHeader()
+	HeapHeader()
+	<CODE_KEYWORD>
+} 
+
+
+void ProgramHeader() :
+{
+	Token t;
+}
+{
+	<PROGRAM_NAME_KEYWORD>
+	t=<PROGRAM_NAME>
+	{
+		jjtThis.setName(t.image);
+	}
+}
+
+void HeapHeader() :
+{
+	Token t;
+}
+{
+	<HEAP_SIZE_KEYWORD>
+	t=<HEAP_SIZE>
+	{
+		jjtThis.setSize(t.image);
+	}
+}
+
+/** Instruction productions. */
+void Expression() : {}
+{
+	UnaryExpression()
+|
+	BlockExpression()
+}
+
+void UnaryExpression() : 
+{
+	Token t;
+}
+{
+	t=<INSTRUCTION_LITERAL>
+	{
+		jjtThis.setInstruction(t.image);
+	}	
+}
+
+void BlockExpression() : {}
+{
+	"[" (Expression())* "]"
+}
