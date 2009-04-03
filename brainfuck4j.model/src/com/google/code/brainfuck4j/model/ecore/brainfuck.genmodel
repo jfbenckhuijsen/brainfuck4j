@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/brainfuck-model/src"
+    modelPluginID="brainfuck_model" modelName="Brainfuck" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>brainfuck.ecore</foreignModel>
+  <genPackages prefix="Brainfuck" basePackage="com.google.code.brainfuck4j.model"
+      disposableProviderFactory="true" ecorePackage="brainfuck.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="brainfuck.ecore#//Instruction">
+      <genEnumLiterals ecoreEnumLiteral="brainfuck.ecore#//Instruction/NULL"/>
+      <genEnumLiterals ecoreEnumLiteral="brainfuck.ecore#//Instruction/IncPointer"/>
+      <genEnumLiterals ecoreEnumLiteral="brainfuck.ecore#//Instruction/DecPointer"/>
+      <genEnumLiterals ecoreEnumLiteral="brainfuck.ecore#//Instruction/IncValue"/>
+      <genEnumLiterals ecoreEnumLiteral="brainfuck.ecore#//Instruction/DecValue"/>
+      <genEnumLiterals ecoreEnumLiteral="brainfuck.ecore#//Instruction/Output"/>
+      <genEnumLiterals ecoreEnumLiteral="brainfuck.ecore#//Instruction/Input"/>
+    </genEnums>
+    <genClasses ecoreClass="brainfuck.ecore#//Program">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference brainfuck.ecore#//Program/header"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference brainfuck.ecore#//Program/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="brainfuck.ecore#//ProgramHeader">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brainfuck.ecore#//ProgramHeader/heap"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brainfuck.ecore#//ProgramHeader/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="brainfuck.ecore#//Expression"/>
+    <genClasses ecoreClass="brainfuck.ecore#//UnaryExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute brainfuck.ecore#//UnaryExpression/instruction"/>
+    </genClasses>
+    <genClasses ecoreClass="brainfuck.ecore#//BlockExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference brainfuck.ecore#//BlockExpression/expressions"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
