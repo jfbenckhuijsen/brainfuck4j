@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Brainfuck Compiler
+Bundle-SymbolicName: com.google.code.brainfuck4j.compiler
+Bundle-Version: 1.0.0
+Bundle-ClassPath: compiler.jar,
+ libs/bcel-5.2.jar
+Export-Package: com.atosorigin.nl.brainfuck.compiler
+Bundle-Vendor: Atos Origin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: com.google.code.brainfuck4j.model;bundle-version="1.0.0"
